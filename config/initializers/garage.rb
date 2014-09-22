@@ -2,6 +2,7 @@ Garage.configure {}
 Garage::TokenScope.configure do
   register :public do
     access :read, User
+    access :write, User
   end
 end
 
