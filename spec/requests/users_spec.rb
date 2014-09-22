@@ -102,4 +102,31 @@ RSpec.describe 'users', type: :request do
       end
     end
   end
+
+  describe 'DELETE /users/:user_id' do
+    context 'with other user' do
+      let!(:other) { FactoryGirl.create(:user, name: 'Bob') }
+
+      it 'returns bad request' do
+        delete "/users/#{other.id}", params, env
+        expect(response).to have_http_status(403)
+      end
+    end
+
+    context 'by admin user' do
+      let(:resource_owner) { FactoryGirl.create(:user, name: 'admin') }
+      let!(:other) { FactoryGirl.create(:user, name: 'Bob') }
+
+      it 'destroys resource' do
+        delete "/users/#{other.id}", params, env
+        expect(response).to have_http_status(200)
+
+        deleted_user = JSON.parse(response.body)
+        expect(deleted_user).to match(
+          'id' => other.id,
+          'name' => 'Bob'
+        )
+      end
+    end
+  end
 end
