@@ -31,6 +31,19 @@ RSpec.describe 'users', type: :request do
         )
       )
     end
+
+    describe 'pagination' do
+      before { 10.times {|i| FactoryGirl.create(:user, name: "name #{i}") } }
+      let(:params) { {per_page: 5} }
+
+      it 'returns next link' do
+        get '/users', params, env
+        expect(response).to have_http_status(200)
+
+        expect(response.header).to have_key('Link')
+        expect(response.header['X-List-TotalCount']).to eq ('15')
+      end
+    end
   end
 
   describe 'GET /users/:user_id' do

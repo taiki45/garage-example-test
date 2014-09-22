@@ -15,6 +15,10 @@ class UsersController < ApplicationController
     @resource.tap {|r| r.update_attributes!(user_params) }
   end
 
+  def respond_with_resources_options
+    { paginate: true }
+  end
+
   def respond_with_resource_options
     {
       put: { body: true },
