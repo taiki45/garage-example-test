@@ -10,4 +10,19 @@ class UsersController < ApplicationController
   def require_resource
     @resource = User.find(params[:id])
   end
+
+  def update_resource
+    @resource.tap {|r| r.update_attributes!(user_params) }
+  end
+
+  def respond_with_resource_options
+    {
+      put: { body: true },
+      delete: { body: true }
+    }
+  end
+
+  def user_params
+    params.require(:user).permit(:name)
+  end
 end
