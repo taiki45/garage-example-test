@@ -32,4 +32,19 @@ RSpec.describe 'users', type: :request do
       )
     end
   end
+
+  describe 'GET /users/:user_id' do
+    let!(:other) { FactoryGirl.create(:user, name: 'Bob') }
+
+    it 'returns other user resource' do
+      get "/users/#{other.id}", params, env
+      expect(response).to have_http_status(200)
+
+      user = JSON.parse(response.body)
+      expect(user).to match(
+        'id' => other.id,
+        'name' => other.name
+      )
+    end
+  end
 end
