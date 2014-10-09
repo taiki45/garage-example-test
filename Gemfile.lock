@@ -1,6 +1,7 @@
 GIT
-  remote: git://github.com/cookpad/garage.git
-  revision: 78157933f7286680bce5a5208fdfaff2c7cf1279
+  remote: git://github.com/taiki45/garage.git
+  revision: c65cf6df6a064111618dbae24a2da36b58a33636
+  branch: responder-problems
   specs:
     garage (1.2.5)
       coffee-rails

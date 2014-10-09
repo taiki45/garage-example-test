@@ -24,7 +24,7 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
-gem 'garage', github: 'cookpad/garage'
+gem 'garage', github: 'taiki45/garage', branch: 'responder-problems'
 gem 'kaminari'
 
 group :development do
